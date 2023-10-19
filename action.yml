@@ -5,6 +5,7 @@ inputs:
     description: 'token for cli'
     required: true
   hash:
+    type: string
     description: 'hash of the config'
     required: true
   apiUrl:
