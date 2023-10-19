@@ -1,0 +1,39 @@
+name: 'Schema bypass'
+description: 'bypass schema'
+inputs:
+  token:
+    description: 'token for cli'
+    required: true
+  hash:
+    description: 'hash of the config'
+    required: true
+  apiUrl:
+    description: 'url of inigo api'
+outputs:
+  result:
+    description: "bypass result"
+    value: ${{ steps.schema-bypass.result }}
+runs:
+  using: "composite"
+  steps:
+    - name: save inigo token to env
+      run: echo "INIGO_TOKEN=${{inputs.token}}" >> $GITHUB_ENV
+      shell: bash
+    - name: save inigo url to env
+      run: echo "INIGO_API_URL=${{inputs.apiUrl}}" >> $GITHUB_ENV
+      shell: bash
+    - name: install inigo cli
+      shell: bash
+      run: wget -c https://github.com/inigolabs/artifacts/releases/latest/download/cli_linux_amd64.tar.gz -O - | tar -xz;
+    - id: print-version
+      run: ./inigo --version
+      shell: bash
+    - id: print-url
+      run: echo $INIGO_API_URL
+      shell: bash
+    - id: print-services
+      run: echo $(./inigo get service)
+      shell: bash
+    - id: schema-bypass
+      run: ./inigo bypass ${{inputs.hash}}
+      shell: bash
