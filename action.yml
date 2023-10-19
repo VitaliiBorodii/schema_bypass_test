@@ -2,6 +2,7 @@ name: 'Schema bypass'
 description: 'bypass schema'
 inputs:
   token:
+    type: environment
     description: 'token for cli'
     required: true
   hash:
@@ -9,6 +10,7 @@ inputs:
     description: 'hash of the config'
     required: true
   apiUrl:
+    type: environment
     description: 'url of inigo api'
 outputs:
   result:
