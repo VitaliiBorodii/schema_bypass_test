@@ -2,16 +2,16 @@ name: 'Schema bypass'
 description: 'bypass schema'
 inputs:
   token:
-    type: environment
     description: 'token for cli'
     required: true
+  apiUrl:
+    description: 'url of inigo api'
   hash:
-    type: string
     description: 'hash of the config'
     required: true
-  apiUrl:
-    type: environment
-    description: 'url of inigo api'
+  action:
+    description: 'action to bypass (check | apply)'
+    required: true
 outputs:
   result:
     description: "bypass result"
@@ -38,5 +38,5 @@ runs:
       run: echo $(./inigo get service)
       shell: bash
     - id: schema-bypass
-      run: ./inigo bypass ${{inputs.hash}}
+      run: ./inigo bypass ${{inputs.action}} ${{inputs.hash}}
       shell: bash
