@@ -9,9 +9,6 @@ inputs:
   hash:
     description: 'hash of the config'
     required: true
-  action:
-    description: 'action to bypass (check | apply)'
-    required: true
 outputs:
   result:
     description: "bypass result"
@@ -38,5 +35,5 @@ runs:
       run: echo $(./inigo get service)
       shell: bash
     - id: schema-bypass
-      run: ./inigo bypass ${{inputs.action}} ${{inputs.hash}}
+      run: ./inigo bypass ${{inputs.hash}}
       shell: bash
